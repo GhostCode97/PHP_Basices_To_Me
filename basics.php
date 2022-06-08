@@ -316,8 +316,6 @@ function test_go_to()
 // $_SERVER is a super global variable which contains information about headers, paths, and script locations.
 // $_GET is a super global variable which is used to collect or receive data after submitting an HTML form.
 // $_POST to store data in database after submitting an HTML form with method="post".
-// $_DELETE to delete data in database after submitting an HTML form with method="delete".
-// $_PUT to update data in database after submitting an HTML form with method="put".
 // $_FILES to upload files after submitting an HTML form with method="post".
 // $_COOKIE to store data in cookie.
 // $_SESSION to know about user session.
