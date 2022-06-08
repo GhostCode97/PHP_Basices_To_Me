@@ -313,6 +313,7 @@ function test_go_to()
 
 
 // super global variable
+// $GLOBALS is a PHP super global variable which is used to access global variables from anywhere in the PHP script.
 // $_SERVER is a super global variable which contains information about headers, paths, and script locations.
 // $_GET is a super global variable which is used to collect or receive data after submitting an HTML form.
 // $_POST to store data in database after submitting an HTML form with method="post".
@@ -323,7 +324,16 @@ function test_go_to()
 // $_REQUEST to know about user request.
 
 
+//PHP Connect to  Database
+// $conn = mysqli_connect('localhost', 'root', '', 'eco');
+// $conn = pg_connect("host=localhost port=5432 dbname=php_crud user=root password=");
+// $conn = mssql_connect('localhost', 'root', '', 'php_crud');
+// $conn = sqlite_open('localhost', 'root', '', 'php_crud');
+
 ?>
+
+
+
 </body>
 
 </html>
