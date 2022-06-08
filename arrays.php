@@ -88,6 +88,7 @@ echo "<pre>". array_rand($arr)."</pre>";
 echo "<h2>shuffle array randomly</h2>";
 shuffle($arr);
 echo "<pre>" . print_r($arr, true) . "</pre>";
+// array_unique() to remove duplicate element from array
 
 // or  in https://www.php.net/manual/en/ref.array.php search array function
 // echo count($arr);
