@@ -72,6 +72,13 @@ Conditional Assignment Operators
 ?:	Ternary operato  $condition ? $x : $y
 ??   Null coalescing operator  $x = expr1 ?? expr2      */
 
+/*
+error control operators
+@	Suppress error	@$x
+*/
+//echo @$x or die('error');
+@include('functions.php') or die('error');
+
 // local scope
 function test()
 {
@@ -151,7 +158,7 @@ echo "acos(1) = " . acos(1) . "\n<br>";
 // is_null to check variable is null or not
 // isset() to check variable is set or not
 // empty() to check if variable is empty or not
-
+// function_exists() to check function is exist or not
 /* 
 // non empty string = true and empty string = false  and 0 = false 
         // $val=0; // $val='0' // $val=''; 
@@ -310,6 +317,91 @@ function test_go_to()
 // bilt-in function and user-defined function
 // bilt-in function are predefined function in php
 // user-defined function are function that we create
+
+// to get system name
+echo php_uname();  echo "\n<br>";
+
+// function number of arguments
+function test_arguments()
+{
+    echo "Number of arguments is " . func_num_args() . "\n<br>";
+    echo "Arguments are " . func_get_arg(0) . "\n<br>";
+    foreach (func_get_args() as $arg) {
+        echo $arg . "\n<br>";
+    }
+}
+
+// or spread operator (...)
+function test_arguments2(...$args)
+{
+    echo "Number of arguments is " . count($args) . "\n<br>";
+    echo "Arguments are " . $args[0] . "\n<br>";
+    foreach ($args as $arg) {
+        echo $arg . "\n<br>";
+    }
+}
+function test_arguments3($name , $age, ...$skills)
+{
+    echo "Name is $name \n<br>";
+    echo "Age is $age \n<br>";
+    echo "Skills are ";
+    foreach ($skills as $skill) {
+        echo $skill . " ";
+    }
+    echo "\n<br>";
+}
+//test_arguments("Ammar", "24", "sekolah", "24");
+//test_arguments2(1, 2, 3, 4, 5);
+//$skills=['html','css','js'];
+//test_arguments3("Ammar", "24", ...$skills);
+//test_arguments3("Ammar", "24", ...['sekolah','24']);
+
+//coll by reference function 
+function test_ref(&$x)
+{
+    $x = $x * 2;
+}
+$ref = 10;
+test_ref($ref);
+echo $ref . "\n<br>";
+// coll by value function
+function test_val($x) : int {
+   return $x = $x * 2;
+}
+test_val($ref);
+echo $ref . "\n<br>";
+// function func_name()use($variable){}  use variable in function
+
+// Anonymous function (lambda function)
+$func = function ($x) use ($ref) {
+    return $x ** 2 + $ref;
+};
+echo $func(5) . "\n<br>";
+
+// strict mode is a way to make sure that all variables are declared before they are used.
+// declare(strict_types=1); to enable strict mode
+
+
+
+// per-defined constant 
+// echo PHP_VERSION;  echo "\n<br>"; // php version
+// echo PHP_OS;  echo "\n<br>"; // php os
+// echo PHP_INT_MAX;  echo "\n<br>"; // php max integer
+// echo PHP_INT_SIZE;  echo "\n<br>"; // php integer size
+// echo PHP_FLOAT_DIG;  echo "\n<br>"; // php float digit
+// echo PHP_FLOAT_EPSILON;  echo "\n<br>"; // php float epsilon
+// echo PHP_FLOAT_MAX;  echo "\n<br>"; // php float min
+
+// magic constant
+// echo __LINE__;  echo "\n<br>";
+// echo __FILE__;  echo "\n<br>";
+// echo __DIR__;  echo "\n<br>";
+
+// include and require
+// include is used to include a file
+// require is used to include a file and throw an error if the file is not found
+// include_once is used to include a file only once
+// require_once is used to include a file and throw an error if the file is not found and only once
 
 
 // super global variable
