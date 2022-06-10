@@ -371,8 +371,6 @@ function test_val($x) : int {
 test_val($ref);
 echo $ref . "\n<br>";
 // function func_name()use($variable){}  use variable in function
-
-// Anonymous function (lambda function)
 $func = function ($x) use ($ref) {
     return $x ** 2 + $ref;
 };

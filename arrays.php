@@ -130,4 +130,10 @@ echo "<pre>" . print_r($hobbies, true) . "</pre>";
 echo"<h2>rsort</h2>";
 rsort($hobbies);
 echo "<pre>" . print_r($hobbies, true) . "</pre>";
+
+// array_map() to apply function to array elements and return array of results (apply function to each element)
+echo"<h2>array_map</h2>";
+$arr = array_map('strtoupper', $hobbies);
+echo "<pre>" . print_r($arr, true) . "</pre>";
+
 // Path: arrays.php
