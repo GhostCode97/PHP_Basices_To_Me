@@ -131,9 +131,44 @@ echo"<h2>rsort</h2>";
 rsort($hobbies);
 echo "<pre>" . print_r($hobbies, true) . "</pre>";
 
-// array_map() to apply function to array elements and return array of results (apply function to each element)
+// array_map("namefunction", $array) to apply function to array elements and return array of results (apply function to each element)
 echo"<h2>array_map</h2>";
 $arr = array_map('strtoupper', $hobbies);
 echo "<pre>" . print_r($arr, true) . "</pre>";
 
+// delete all elements in array
+echo"<h2>delete all elements in array</h2>";
+$arr = array();
+echo "<pre>" . print_r($arr, true) . "</pre>";
+// Distroy array
+echo"<h2>Distroy array</h2>";
+unset($arr);
+echo "<pre>" . print_r($arr , true) . "</pre>";
+// Anonymous function (lambda function)
+$arr=array_map(function($item){return strtoupper($item);}, $hobbies);
+echo "<pre>".print_r($arr, true)."</pre>";
+
+// arrow function in php 7
+echo "<h2>arrow function</h2>";
+$arr=array_map(fn($item)=>strtolower($item), $hobbies);
+echo "<pre>".print_r($arr, true)."</pre>";
+// more example
+echo "<h2>more example</h2>";
+$arrow = fn($num)=>$num*2;
+echo "<pre>".$arrow(5)."</pre>";
+// array_reduce(("namefunction", $array) to reduce array to single value
+echo "<h2>array_reduce</h2>";
+$arr = array(1, 2, 3, 4, 5);
+$sum = array_reduce($arr, function ($carry, $item) {
+    return $carry + $item;
+});
+echo "<pre>".$sum."</pre>";
+
+// array_filter("namefunction", $array) to filter elements in array
+echo "<h2>array_filter</h2>";
+$arr = array(1, 2, 3, 4, 5);
+$arr = array_filter($arr, function ($item) {
+    return $item > 2;
+});
+echo "<pre>".print_r($arr, true)."</pre>";
 // Path: arrays.php
