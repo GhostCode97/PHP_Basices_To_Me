@@ -2,19 +2,26 @@
 //create class database
 class database
 {
-    protected $host = 'localhost';
-    protected $user = 'root';
-    protected $pass = '';
-    protected $dbname = '';
+    private $host ;
+    private $user ;
+    private $pass ;
+    private $dbname ;
     protected $conn;
-    protected $result;
+    public $result;
+    // default constructor
+
     // create constructor to set variables 
-    public function __construct($host, $user, $pass, $dbname)
+    public function __construct($host='localhost', $user='root', $pass='', $dbname='')
     {
         $this->host = $host;
         $this->user = $user;
         $this->pass = $pass;
         $this->dbname = $dbname;
+    }
+    // return infromation of database
+    public function getInfo()
+    {
+        return "Host: ".$this->host."<br>User: ".$this->user."<br>Password: ".$this->pass."<br>Database: ".$this->dbname;
     }
     //create function connect
     public function connect()
@@ -33,33 +40,74 @@ class database
     {
         $this->conn = null;
     }
-    // create function select
-    public function select($query)
+    // create function select to select data from database
+}
+class databaseClass extends database
+{
+    public $name_table;
+    public $name_column;
+    public $name_value;
+    public $name_where;
+
+    // constructor to set variables
+    public function __construct($host='localhost', $user='root', $pass='', $dbname='')
     {
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        parent::__construct($host, $user, $pass, $dbname);
     }
-    // create function insert
-    public function insert($query)
+    // crate table function
+    public function createTable($table, $columns)
     {
-        $stmt = $this->conn->prepare($query);
+        $this->name_table = $table;
+        $this->name_column = $columns;
+        $sql = "CREATE TABLE IF NOT EXISTS " . $this->name_table . " (" . $this->name_column . ")";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     }
-    // create function update
-    public function update($query)
+    public function selelect($table, $column, $value)
     {
-        $stmt = $this->conn->prepare($query);
+        $this->name_table = $table;
+        $this->name_column = $column;
+        $this->name_value = $value;
+       // $sql = "SELECT " . $this->name_column . " FROM " . $this->name_table . " WHERE " . $this->name_where . " = '" . $this->name_value . "'";
+        $sql = "SELECT $this->name_column FROM $this->name_table";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $this->result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $this->result;
+    }
+    // insert data to database
+    public function insert($table, $columns, $values)
+    {
+        $this->name_table = $table;
+        $this->name_column = $columns;
+        $this->name_value = $values;
+        $sql = "INSERT INTO " . $this->name_table . " (" . $this->name_column . ") VALUES (" . $this->name_value . ")";
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     }
-    // create function delete
-    public function delete($query)
+    // delete data from database
+    public function delete($table, $column, $value)
     {
-        $stmt = $this->conn->prepare($query);
+        $this->name_table = $table;
+        $this->name_column = $column;
+        $this->name_value = $value;
+        $sql = "DELETE FROM " . $this->name_table . " WHERE " . $this->name_column . " = '" . $this->name_value . "'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+    }
+    // delete all data from database
+    public function deleteAll($table)
+    {
+        $this->name_table = $table;
+        $sql = "DELETE FROM " . $this->name_table;
+        $stmt = $this->conn->prepare($sql);
         $stmt->execute();
     }
 }
+
+
+
+// create function insert to insert data to database
 // $conn = mysqli_connect('localhost', 'root', '', 'eco');
 // $servername = "localhost";
 // $username = "username";
