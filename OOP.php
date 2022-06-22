@@ -90,3 +90,52 @@ $admin=new admin('admin@email.com','Ammar','pass','admin');
 $user=new user('user@email.com','Ahmad','pass','','','user');
 $users=users::getInstance();
 //$users->addUser('user@email.com','Ahmad','pass');
+
+// class have magic method
+class car{
+    private $name;
+    private $color;
+    private $speed;
+    private $price;
+    public function __construct($name,$color,$speed,$price){
+        $this->name=$name;
+        $this->color=$color;
+        $this->speed=$speed;
+        $this->price=$price;
+    }
+    // create destructor function
+    public function __destruct(){
+        echo '<br>Destructor called';
+    }
+    // create magic method
+    public function __get($name){
+        return $this->$name;
+    }
+    public function __set($name,$value){
+        $this->$name=$value;
+    }
+    public function __clone()
+    {
+        $this->name = "Clone ".$this->name;
+    }
+    public function __toString()
+    {
+        return "Car name: ".$this->name."<br>Color: ".$this->color."<br>Speed: ".$this->speed."<br>Price: ".$this->price;
+    }
+    public function __invoke()
+    {
+        return "Car name: ".$this->name."<br>Color: ".$this->color."<br>Speed: ".$this->speed."<br>Price: ".$this->price;
+    }
+    public function getName(){
+        return $this->name;
+    }
+    public function getColor(){
+        return $this->color;
+    }
+    public function getSpeed(){
+        return $this->speed;
+    }
+    public function getPrice(){
+        return $this->price;
+    }
+}
